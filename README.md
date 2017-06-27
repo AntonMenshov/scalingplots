@@ -6,4 +6,4 @@ Syntax, Inputs, and Outputs are described inside of the .m files
 
 main.m provides a sample script that uses all the available subroutines.
 
-![Sample Plot](./sample.png =200x)
+![Sample Plot](sample.png =200x)
