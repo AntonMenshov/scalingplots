@@ -16,8 +16,8 @@ function [annot] = getStringAnnot(k,p,q,iterative,letter)
 %    annot ? resulting LaTeX formatted string
 % 
 % Example: 
-%     annot = getStringAnnot(19.5E+2,2,3,0);
-%             annot = "$1.9\times10^{3}N^{2}\log^{3}NN_{it}$"
+%     annot = getStringAnnot(19.5E+2,2,3,0,'N');
+%             annot = "$1.9\times10^{3}N^{2}\log^{3}{N}N_{it}$"
 % Other m-files required: getMantExpnt.m
 % Subfunctions: none
 % MAT-files required: none
