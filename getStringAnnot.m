@@ -1,4 +1,4 @@
-function [annot] = getStringAnnot(k,p,q,iterative)
+function [annot] = getStringAnnot(k,p,q,iterative,letter)
 % getStringAnnot - Scaling plot annotation
 % Forms string for scaling plot annotation of the form N^p log^q N
 % Note, string is formed in LaTeX format, requiring LaTeX interpreter to be
@@ -11,6 +11,7 @@ function [annot] = getStringAnnot(k,p,q,iterative)
 %    p - power of N
 %    q - power of the log
 %    iterative - true\false, if true - will add N_it to the end of the annotation
+%    letter - which letter to use for (instead of N) 
 % Outputs: 
 %    annot ? resulting LaTeX formatted string
 % 
@@ -36,16 +37,16 @@ part1=strcat(num2str(k_m,num_decimal_places_mantissa),'\times','10^{',num2str(k_
 % form the polynomial term
 if (floor(p)==p) %p is integer
     if (p==1)
-        part2='N';  % no power is required for linear term
+        part2=letter;  % no power is required for linear term
     elseif (p==0)
         part2='';   % for a constant scaling even the 'N' itself is not required
     else
-        part2=strcat('N^{',num2str(p),'}'); % otherwise the power is written
+        part2=strcat(letter,'^{',num2str(p),'}'); % otherwise the power is written
     end
 else
     num_decimal_places_Nscaling=2;
     % if p is not integer, 2 decimal places are used.
-    part2=strcat('N^{',num2str(p,num_decimal_places_Nscaling),'}');   
+    part2=strcat(letter,'^{',num2str(p,num_decimal_places_Nscaling),'}');   
 end
 
 % form the logarithmic term
@@ -53,10 +54,10 @@ if (q==0) % if power of the log is 0 - no need to add anything to the string
     part3='';
 else
     if (q==1)
-        part3='\log N';
+        part3=strcat('\log {',letter,'}');
     else
         %fractional log powers are not yet supported
-        part3=strcat('\log^{',num2str(q),'}N'); 
+        part3=strcat('\log^{',num2str(q),'}',letter); 
     end
 end
 

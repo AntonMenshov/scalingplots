@@ -45,19 +45,19 @@ n=logspace(minN,maxN,NumAsympt)';
 % fitting N\logN for the iterative algorithm
 [asympt1,k1]=getAsymptVector(n,1,LogBase,1,N,Timing1,shift);
 %obtain a string for annotation
-s1_annot=getStringAnnot(k1,1,1,1);
+s1_annot=getStringAnnot(k1,1,1,1,'N');
 
 % get the asymptotic line (x -> n, y -> asympt2) and scaling coefficient (k2)
 % fitting N\log^2N for a non-iterative algorithm
 [asympt2,k2]=getAsymptVector(n,1,LogBase,2,N,Timing2,shift);
 %obtain a string for annotation
-s2_annot=getStringAnnot(k2,1,2,0);
+s2_annot=getStringAnnot(k2,1,2,0,'N');
 
 % get the asymptotic line (x -> n, y -> asympt2) and scaling coefficient (k2)
 % fitting N^2 for a non-iterative algorithm
 [asympt3,k3]=getAsymptVector(n,2,LogBase,0,N,Timing3,shift);
 %obtain a string for annotation
-s3_annot=getStringAnnot(k3,2,0,0);
+s3_annot=getStringAnnot(k3,2,0,0,'N');
 
 %% Figure Plotting
 
