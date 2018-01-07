@@ -47,6 +47,12 @@ n=logspace(minN,maxN,NumAsympt)';
 %obtain a string for annotation
 s1_annot=getStringAnnot(k1,1,1,1,'N');
 
+% get the asymptotic line (x -> n, y -> asympt4) and scaling coefficients (c4,k4)
+% fitting a 2-term fit for the same plot
+[asympt4,c4,k4]=getAsymptVector_2terms(n,0,1,LogBase,1,N,Timing1,shift,shift+3);
+%obtain a string for annotation
+s4_annot=getStringAnnot_2terms(c4,0,k4,1,1,1,'N');
+
 % get the asymptotic line (x -> n, y -> asympt2) and scaling coefficient (k2)
 % fitting N\log^2N for a non-iterative algorithm
 [asympt2,k2]=getAsymptVector(n,1,LogBase,2,N,Timing2,shift);
@@ -65,6 +71,7 @@ figure(1)
 % algorithm I timing
 % plot asymptotic line
 ch1=loglog(n,asympt1,'k-','LineWidth',MyLineWidth);     hold on;
+ch4=loglog(n,asympt4,'k--','LineWidth',MyLineWidth);     hold on;
 % plot actual data with the markers
 p1=loglog(N,Timing1,'x','LineWidth',MyLineWidth,'MarkerSize',MyMarkerSize);hold on;
 % customize the look of the plot
@@ -98,6 +105,8 @@ yticks(ticksY);
 % place annotations after the limits (xlim,ylim) have been setup
 [x1,y1,x2,y2]=getAnnotationPosition(n,asympt1,0.85,BaseAnnotationLineLength,1.0,2);
 annotation('textarrow',[x1,x2],[y1,y2],'interpreter','latex','String',s1_annot,'FontSize',ff-4);
+[x1,y1,x2,y2]=getAnnotationPosition(n,asympt4,0.85,BaseAnnotationLineLength,1.0,2);
+annotation('textarrow',[x1,x2],[y1,y2],'interpreter','latex','String',s4_annot,'FontSize',ff-4);
 [x1,y1,x2,y2]=getAnnotationPosition(n,asympt2,0.5,BaseAnnotationLineLength,1.0,2);
 annotation('textarrow',[x1,x2],[y1,y2],'interpreter','latex','String',s2_annot,'FontSize',ff-4);
 [x1,y1,x2,y2]=getAnnotationPosition(n,asympt3,0.1,BaseAnnotationLineLength,1.0,1);
@@ -109,7 +118,7 @@ xlabel('$N$');
 ylabel('Time (s)');
 
 % legend
-h=legend([p3 p2 p1],{'Algorithm III','Algorithm II','Algorithm I'},'Location','southeast');
+h=legend([p3 p2 p1],{'Algorithm III','Algorithm II','Algorithm I'},'Location','northwest');
 h.FontSize=ff-6.;
 h.EdgeColor=[1. 1. 1.];
 h.Interpreter='none';

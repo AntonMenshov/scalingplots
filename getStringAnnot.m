@@ -1,10 +1,10 @@
 function [annot] = getStringAnnot(k,p,q,iterative,letter)
 % getStringAnnot - Scaling plot annotation
-% Forms string for scaling plot annotation of the form N^p log^q N
+% Forms string for scaling plot annotation of the form k*N^p log^q N
 % Note, string is formed in LaTeX format, requiring LaTeX interpreter to be
 % turned on in the file, where it is being called.
 %
-% Syntax: annotation = getStringAnnot(k,p,q,iterative)
+% Syntax: annotation = getStringAnnot(k,p,q,iterative,letter)
 %
 % Inputs:
 %    k - scaling coefficient, only 2 decimal places will be taken for string
@@ -32,7 +32,11 @@ function [annot] = getStringAnnot(k,p,q,iterative,letter)
 % form the coefficient
 [k_m,k_e]=getMantExpnt(k);
 num_decimal_places_mantissa=2;
-part1=strcat(num2str(k_m,num_decimal_places_mantissa),'\times','10^{',num2str(k_e,3),'}');
+if (k_e~=0)
+    part1=strcat(num2str(k_m,num_decimal_places_mantissa),'\times','10^{',num2str(k_e,3),'}');
+else
+    part1=strcat(num2str(k_m,num_decimal_places_mantissa));
+end
 
 % form the polynomial term
 if (floor(p)==p) %p is integer

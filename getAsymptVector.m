@@ -40,6 +40,10 @@ N=size(data,1);
 SizeOut=size(points,1);
 asympt=zeros(SizeOut,1);
 
+if (N-shift<1)
+    error('shift exceeds the amount of given data');
+end
+
 if ((b<=0)) %if base of the logarithm is accidentally smaller than 0 - ignore log
     M(1,1)=(n(N-shift)^p); 
 else
